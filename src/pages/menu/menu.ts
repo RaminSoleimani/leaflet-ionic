@@ -57,7 +57,8 @@
           document.getElementById('map').outerHTML="";
       }
     loadmap() {
-      this.map = leaflet.map("map").fitWorld();
+      //this.map = leaflet.map("map").fitWorld();
+      this.map = leaflet.map("map").setView([41.4822619,2.1341925], 13);
       leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attributions: 'www.tphangout.com',
         maxZoom: 20
@@ -85,8 +86,8 @@
 
       leaflet.Routing.control({
       waypoints: [
-      leaflet.latLng(41.4879067,2.1312337),
-      leaflet.latLng(41.4858456,2.128215)
+      leaflet.latLng(41.4822619,2.1341925),
+      leaflet.latLng(41.4860676,2.1364992)
       ],
       routeWhileDragging: true
       }).addTo(this.map);
@@ -212,7 +213,7 @@
         let markerGroup = leaflet.featureGroup();
         for (x in this.items) {
           var myIcon = leaflet.icon({
-          iconUrl: '../../assets/imgs/path.png',
+          iconUrl: '../../assets/imgs/foots.png',
           iconSize: [20, 54],
           iconAnchor: [10, 27],
           popupAnchor: [-3, -76],
@@ -235,9 +236,18 @@
       let markerGroup1 = leaflet.featureGroup();
        for(let step in this.path)
        {
+          var myIcon = leaflet.icon({
+          iconUrl: '../../assets/imgs/arrow.png',
+          iconSize: [20, 54],
+          iconAnchor: [10, 27],
+          popupAnchor: [-3, -76],
+          shadowUrl: 'my-icon-shadow.png',
+          shadowSize: [68, 95],
+          shadowAnchor: [22, 94]
+          });
 
             
-         let mark = leaflet.marker([+this.path[step].lat, +this.path[step].lng]).addTo(this.map);
+         let mark = leaflet.marker([+this.path[step].lat, +this.path[step].lng], {icon: myIcon}).addTo(this.map);
          markerGroup1.addLayer(mark);
 
 
